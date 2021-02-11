@@ -16,11 +16,11 @@ namespace DataAccess.Concrete.InMemory
         {
             _cars = new List<Car> {
 
-                new Car{ CarId=1, BrandId=20, ColorId=253, ModelYear=2020, DailyPrice=300, Description="Mercedes A180" },
-                new Car{ CarId=2, BrandId=21, ColorId=254, ModelYear=2020, DailyPrice=350, Description="Mercedes CLA AMG" },
-                new Car{ CarId=3, BrandId=22, ColorId=255, ModelYear=2021, DailyPrice=380, Description="Mercedes CLA 200" },
-                new Car{ CarId=4, BrandId=23, ColorId=256, ModelYear=2021, DailyPrice=390, Description="Mercedes CLS" },
-                new Car{ CarId=5, BrandId=24, ColorId=257, ModelYear=2021, DailyPrice=400, Description="Mercedes GLB" },
+                new Car{ CarId=1, BrandId=1, BrandName="Mercedes", ColorId=1, ModelYear=2020, DailyPrice=300, Description="Dizel,Otomatik Vites" },
+                new Car{ CarId=2, BrandId=2, BrandName="BMW", ColorId=2, ModelYear=2020, DailyPrice=350, Description="Benzin,Otomatik Vites" },
+                new Car{ CarId=3, BrandId=3, BrandName="Audi", ColorId=3, ModelYear=2021, DailyPrice=380, Description="Dizel,Otomatik Vites" },
+                new Car{ CarId=4, BrandId=4, BrandName="Toyota", ColorId=4, ModelYear=2021, DailyPrice=390, Description="Dizel,Otomatik Vites" },
+                new Car{ CarId=5, BrandId=5, BrandName="Hyundai", ColorId=5, ModelYear=2021, DailyPrice=400, Description="Benzin,Otomatik Vites" }
             };
         }
 
@@ -50,10 +50,6 @@ namespace DataAccess.Concrete.InMemory
             throw new NotImplementedException();
         }
 
-        public List<Car> GetById(int categoryId)
-        {
-            return _cars.Where(c => c.CategoryId == categoryId).ToList();
-        }
 
         public void Update(Car car)
         {
