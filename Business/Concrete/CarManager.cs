@@ -31,6 +31,11 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarAdded);
         }
 
+        public IResult Delete(Car car)
+        {
+            throw new NotImplementedException();
+        }
+
         public IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour==22)
@@ -56,11 +61,29 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>(_carsDal.Get(c=>c.CarId==carId));
         }
 
+        public IDataResult<List<Car>> GetById()
+        {
+            throw new NotImplementedException();
+        }
+
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carsDal.GetCarDetails());
         }
 
+        public IResult Update(Car car)
+        {
+            if (car.DailyPrice < 0)
+            {
+                return new ErrorResult(Messages.CarPriceInvalid);
+            }
+            _carsDal.Update(car);
+            return new SuccessResult(Messages.CarUpdated);
+        }
 
+        IDataResult<List<Car>> ICarService.GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
