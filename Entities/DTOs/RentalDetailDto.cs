@@ -1,7 +1,5 @@
-﻿using CoreDemo.Entities;
+﻿using Core.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.DTOs
 {
@@ -19,6 +17,6 @@ namespace Entities.DTOs
 
         public DateTime RentTime { get; set; }
 
-        public DateTime ReturnTime { get; set; }
+        public DateTime? ReturnTime { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
-using CoreDemo.Utilities.Results;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -18,12 +20,9 @@ namespace Business.Concrete
             _customerDal = customerDal;
         }
 
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Add(Customer customer)
         {
-            if (customer.UserId == (_customerDal as Customer).UserId || customer.UserId == (_customerDal as Customer).UserId)
-            {
-                return new ErrorResult(Messages.CustomerIsAlreadyExisting);
-            }
             _customerDal.Add(customer);
             return new SuccessResult(Messages.CustomerAdded);
         }

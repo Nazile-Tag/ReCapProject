@@ -1,4 +1,4 @@
-﻿using CoreDemo.DataAccess.EntityFramework;
+﻿using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -21,6 +21,7 @@ namespace DataAccess.Concrete.EntityFramework
                              join b in context.Brands 
                              on c.CarId equals b.BrandId 
                              select new CarDetailDto { BrandId = b.BrandId, BrandName = b.BrandName, CarId = c.CarId, CarName = c.BrandName, ColorId = c.ColorId, DailyPrice = c.DailyPrice, Description = c.Description };
+
                 return result.ToList();
             }
         }
