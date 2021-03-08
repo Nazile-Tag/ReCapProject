@@ -24,10 +24,9 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
+                _carsDal.Add(car);
 
-            _carsDal.Add(car);
-
-            return new SuccessResult(Messages.CarAdded);
+                return new SuccessResult(Messages.CarAdded);
         }
 
         public IResult Delete(Car car)
@@ -37,12 +36,12 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour==22)
+            if (DateTime.Now.Hour == 22)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
 
-            return new SuccessDataResult<List<Car>>(_carsDal.GetAll(),Messages.CarListed);
+            return new SuccessDataResult<List<Car>>(_carsDal.GetAll(), Messages.CarListed);
         }
 
         public IDataResult<List<Car>> GetAllByCarId(int id)
@@ -57,12 +56,7 @@ namespace Business.Concrete
 
         public IDataResult<Car> GetById(int carId)
         {
-            return new SuccessDataResult<Car>(_carsDal.Get(c=>c.CarId==carId));
-        }
-
-        public IDataResult<List<Car>> GetById()
-        {
-            throw new NotImplementedException();
+            return new SuccessDataResult<Car>(_carsDal.Get(c => c.CarId == carId));
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
@@ -80,9 +74,5 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarUpdated);
         }
 
-        IDataResult<List<Car>> ICarService.GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

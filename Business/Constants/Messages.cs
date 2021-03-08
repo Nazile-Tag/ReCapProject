@@ -1,6 +1,8 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constants
@@ -25,20 +27,26 @@ namespace Business.Constants
         public static string CarRented = "Kiralanmış araba eklenemez.";
         public static string RentalAdded = "Kiralanacak araba eklendi.";
         public static string NoRentals = "Kiralanacak araba bulunmamaktadır.";
-        internal static string CustomerAdded = "Müşteri eklendi";
-        internal static string CustomerIsAlreadyExisting = "Olan bir müşteriyi ekleyemezsiniz";
-        internal static string CustomerDeleted = "Müşteri silindi";
-        internal static string CustomersListedByCompanyName = "Müşteriler şirket isimlerine göre listelendi.";
-        internal static string CustomerUpdated = "Müşteri güncellendi.";
-        internal static string RentalDeleted = "Kiralık araba silindi";
-        internal static string RentalUpdated= "Kiralık araba güncellendi";
-        internal static string CarIsAlreadyOnRent = "Kiralanmış arabayı ekleyemezsiniz";
-        internal static string UserAdded = "Kullanıcı eklendi.";
-        internal static string UserValuesCantBeNull = "Kullanıcı özellikleri boş bırakılamaz";
-        internal static string UserDeleted = "Kullanıcı silindi";
-        internal static string UserUpdated = "Kullanıcı güncellendi";
-
-
-
+        public static string CustomerAdded = "Müşteri eklendi";
+        public static string CustomerIsAlreadyExisting = "Olan bir müşteriyi ekleyemezsiniz";
+        public static string CustomerDeleted = "Müşteri silindi";
+        public static string CustomersListedByCompanyName = "Müşteriler şirket isimlerine göre listelendi.";
+        public static string CustomerUpdated = "Müşteri güncellendi.";
+        public static string RentalDeleted = "Kiralık araba silindi";
+        public static string RentalUpdated= "Kiralık araba güncellendi";
+        public static string CarIsAlreadyOnRent = "Kiralanmış arabayı ekleyemezsiniz";
+        public static string UserAdded = "Kullanıcı eklendi.";
+        public static string UserValuesCantBeNull = "Kullanıcı özellikleri boş bırakılamaz";
+        public static string UserDeleted = "Kullanıcı silindi";
+        public static string UserUpdated = "Kullanıcı güncellendi";
+        public static string BrandCountOfBrandError = "En fazla 15 marka olabilir";
+        public static string BrandNameAlreadyExists = "Bu isimde zaten başka bir marka var";
+        public static string AuthorizationDenied = "Yetkiniz yok.";
+        public static string AccessTokenCreated = "Access token başarıyla oluşturuldu";
+        public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut;";
+        public static string SuccessfulLogin = "Sisteme giriş başarılı";
+        public static string PasswordError = "Şifre hatalı";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string UserRegistered = "Kullanıcı başarıyla kaydedildi";
     }
 }
