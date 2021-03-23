@@ -48,5 +48,10 @@ namespace Business.Constants
         public static string PasswordError = "Şifre hatalı";
         public static string UserNotFound = "Kullanıcı bulunamadı";
         public static string UserRegistered = "Kullanıcı başarıyla kaydedildi";
+        public static string CarHaveNoImage = "Bu arabaya ait bir resim yok";
+        public static string ImageLimitExpiredForCar = "Bir arabaya maksimum 5 resim eklenebilir";
+        public static string InvalidImageExtension = "Geçersiz dosya uzantısı, fotoğraf için kabul edilen uzantılar";
+        public static string[] ValidImageFileTypes = { ".JPG", ".JPEG", ".PNG", ".TIF", ".TIFF", ".GIF", ".BMP", ".ICO" };
+        public static string CarImageMustBeExists = "Böyle bir resim bulunamadı";
     }
 }
