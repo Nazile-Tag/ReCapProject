@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -8,6 +10,7 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -21,12 +24,14 @@ namespace Business.Concrete
             _carsDal = carsDal;
         }
 
+        //[SecuredOperation("admin")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
-                _carsDal.Add(car);
+            _carsDal.Add(car);
 
-                return new SuccessResult(Messages.CarAdded);
+            return new SuccessResult(Messages.CarAdded);
         }
 
         public IResult Delete(Car car)
@@ -36,7 +41,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour == 22)
+            if (DateTime.Now.Hour == 4)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
@@ -47,6 +52,11 @@ namespace Business.Concrete
         public IDataResult<List<Car>> GetAllByCarId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carsDal.GetAll(c => c.CarId == id));
+        }
+
+        public IDataResult<Car> GetAllById(int id)
+        {
+            return new SuccessDataResult<Car>(_carsDal.Get(c => c.CarId == id));
         }
 
         public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)
@@ -70,9 +80,14 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.CarPriceInvalid);
             }
+
             _carsDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
         }
 
+        public IDataResult<CarDetailDto> GetCarDtoById(int carId)
+        {
+            return new SuccessDataResult<CarDetailDto>(_carsDal.GetCarDetails(x => x.CarId == carId).FirstOrDefault());
+        }
     }
 }

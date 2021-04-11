@@ -13,28 +13,30 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, ReCapDbContext>, ICarDal
     {
-        public List<CarDetailDto> GetCarDetails()
+        public List<CarDetailDto> GetCarDetails(Expression<Func<CarDetailDto,bool>> filter =null)
         {
             using (ReCapDbContext context = new ReCapDbContext())
             {
-                var result = from c in context.Cars
-                             join b in context.Brands
-                             on c.CarId equals b.BrandId
-                             join co in context.Colors
-                             on c.ColorId equals co.ColorId
+                var result = from car in context.Cars
+                             join brand in context.Brands
+                             on car.BrandId equals brand.BrandId
+                             join color in context.Colors
+                             on car.ColorId equals color.ColorId
                              select new CarDetailDto
                              {
-                                 CarId = c.CarId,
-                                 ColorName = co.ColorName,
-                                 ModelYear = c.ModelYear,
-                                 BrandName = b.BrandName,
-                                 DailyPrice = c.DailyPrice,
-                                 Description = c.Description
+                                 CarId = car.CarId,
+                                 ColorName = color.ColorName,
+                                 ModelYear = car.ModelYear,
+                                 BrandName = brand.BrandName,
+                                 DailyPrice = car.DailyPrice,
+                                 Description = car.Description,
+                                 ImagePath = context.CarImages.Where(x => x.CarId == car.CarId).Select(x => x.ImagePath).SingleOrDefault()
                              };
 
                 return result.ToList();
             }
         }
+        
     }
 
 }

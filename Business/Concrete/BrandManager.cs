@@ -50,7 +50,7 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<Brand>> GetAll()
         {
-            if (DateTime.Now.Hour == 22)
+            if (DateTime.Now.Hour == 4)
             {
                 return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
             }
@@ -106,6 +106,15 @@ namespace Business.Concrete
             }
             Add(brand);
             return null;
+        }
+
+        public IDataResult<List<Brand>> GetAllByBrandId(int BrandId)
+        {
+            if (DateTime.Now.Hour == 2)
+            {
+                return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
         }
     }
 }

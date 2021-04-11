@@ -19,6 +19,7 @@ namespace Business.Concrete
     public class CarImageManager : ICarImageService
     {
         ICarImageDal _carImageDal;
+
         public CarImageManager(ICarImageDal carImageDal)
         {
             _carImageDal = carImageDal;
@@ -82,9 +83,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarImage>>(CheckIfCarHaveNoImage(carId));
         }
 
-        public IDataResult<CarImage> GetById(int id)
+        public IDataResult<CarImage> GetById(int carId)
         {
-            return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == id));
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == carId));
         }
 
         public IResult Update(CarImage carImage, IFormFile file)
@@ -111,8 +112,10 @@ namespace Business.Concrete
         private IResult CheckIfImageLimitExpired(int carId)
         {
             int result = _carImageDal.GetAll(c => c.CarId == carId).Count;
-            if (result >= 5)
+            
+            if (result >= 6)
                 return new ErrorResult(Messages.ImageLimitExpiredForCar);
+
             return new SuccessResult();
         }
 
@@ -138,6 +141,11 @@ namespace Business.Concrete
             if (_carImageDal.IsExist(id))
                 return new SuccessResult();
             return new ErrorResult(Messages.CarImageMustBeExists);
+        }
+
+        public IDataResult<List<CarImage>> GetImagesByCar(int carId)
+        {
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == carId));
         }
     }
 }

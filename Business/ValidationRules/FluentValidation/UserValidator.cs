@@ -11,12 +11,12 @@ namespace Business.ValidationRules.FluentValidation
     {
         public UserValidator()
         {
-            RuleFor(u => u.Id).NotNull();
-            RuleFor(u => u.FirstName).MinimumLength(3);
-            RuleFor(u => u.LastName).MinimumLength(2);
-            RuleFor(u => u.FirstName).NotEmpty();
-            RuleFor(u => u.LastName).NotEmpty();
-            RuleFor(u => u.Email).Must(EndsWithCom).WithMessage("mail adresiniz .com ile bitmelidir");
+            //RuleFor(u => u.Id).NotNull();
+            //RuleFor(u => u.FirstName).MinimumLength(3);
+            //RuleFor(u => u.LastName).MinimumLength(2);
+            //RuleFor(u => u.FirstName).NotEmpty();
+            //RuleFor(u => u.LastName).NotEmpty();
+            //RuleFor(u => u.Email).Must(EndsWithCom).WithMessage("mail adresiniz .com ile bitmelidir");
         }
 
         private bool EndsWithCom(string arg) 

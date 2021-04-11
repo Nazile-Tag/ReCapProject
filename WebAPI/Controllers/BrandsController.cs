@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
@@ -22,6 +23,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
+            Thread.Sleep(1000);
             var result = _brandService.GetAll();
             if (result.Success) { return Ok(result); }
             return BadRequest();
@@ -55,6 +57,14 @@ namespace WebAPI.Controllers
         public IActionResult Delete(Brand brand)
         {
             var result = _brandService.Delete(brand);
+            if (result.Success) { return Ok(result); }
+            return BadRequest();
+        }
+
+        [HttpGet("getbybrand")]
+        public IActionResult GetByBrand(int brandId)
+        {
+            var result = _brandService.GetAllByBrandId(brandId);
             if (result.Success) { return Ok(result); }
             return BadRequest();
         }
